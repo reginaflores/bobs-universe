@@ -40,6 +40,8 @@ canvas.pointing { cursor: pointer; }
 .title { display: grid; gap: 2px; margin-right: auto; }
 .title h1 { margin: 0; font-family: var(--display); font-weight: 300; font-size: clamp(26px, 4vw, 38px); letter-spacing: .01em; text-wrap: balance; }
 .title h1 i { font-weight: 300; color: var(--gold); }
+.title p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 2px; }
+.title p a:hover { color: var(--gold); }
 .title p { margin: 0; color: var(--ink-dim); font-size: 12.5px; letter-spacing: .04em; }
 .tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .search { position: relative; }
@@ -121,7 +123,7 @@ a { color: var(--lapis); }
 <header class="masthead">
   <div class="title">
     <h1>Bob’s <i>Universe</i></h1>
-    <p id="sub">Bob’s Buddhism Pop-up Series · Tibet House US · 2026</p>
+    <p id="sub">Bob’s Buddhism Pop-up Series · Tibet House US · 2026 · <span class="credit">inspired by <a href="https://barabasi.com/art/work/cosmic-web" target="_blank" rel="noopener">Cosmic Web</a>, Barabási Lab</span></p>
   </div>
   <div class="tools">
     <div class="search">
@@ -218,8 +220,8 @@ a { color: var(--lapis); }
   // optional node images (data.image: data URI or relative path)
   nodes.forEach(n => { if (n.data.image) { const im = new Image(); if (n.data.imageCors !== false) im.crossOrigin = 'anonymous'; im.onload = () => { n.r = Math.max(n.r, n.type === 'bob' ? 26 : 9); draw(); }; im.src = n.data.imageCors === false ? n.data.image : imgUrl(n.data.image); n.img = im; } });
 
-  document.getElementById('sub').textContent =
-    `Bob’s Buddhism Pop-up Series · Tibet House US · 2026 · ${nodes.length} nodes · ${links.length} links · session 1 of 6 catalogued`;
+  document.getElementById('sub').innerHTML =
+    `Bob’s Buddhism Pop-up Series · Tibet House US · 2026 · ${nodes.length} nodes · ${links.length} links · session 1 of 6 catalogued · <span class="credit">inspired by <a href="https://barabasi.com/art/work/cosmic-web" target="_blank" rel="noopener">Cosmic Web</a>, Barabási Lab</span>`;
 
   // ---------- simulation ----------
   const bob = byId.get('agent:thurman-raf'); bob.fx = 0; bob.fy = 0;
